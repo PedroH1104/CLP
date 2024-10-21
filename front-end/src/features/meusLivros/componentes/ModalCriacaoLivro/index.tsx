@@ -52,8 +52,7 @@ export function ModalCriacaoLivro() {
 
     try {
       const response = await CriaLivro(livroAdicionado);
-      if (response && response.status >= 200 && response.status < 300) {
-        console.log("Livro adicionado com sucesso!");
+      if (response && response.status >= 200 && response.status < 300) {        
         buscaLivrosPorUsuario();
         limpaCampos();
         setModalOpen(false);
