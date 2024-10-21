@@ -151,9 +151,7 @@ export async function concluirLivro({ usuarioID, cardAberto, rating, buscaLivros
             dataMeta: data_meta,
             usuarioID: usuarioID,
             livroID: livro_id
-        });
-        
-        console.log("imagem do usuario", imagemDoUsuario)
+        });       
 
         const comentarioParaBD = { 
             id: uuidv4(),          
