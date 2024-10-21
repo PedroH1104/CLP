@@ -8,9 +8,7 @@ export default function Header() {
 
   const { logado, nome, setLogado, setUsuarioID, setLivros, usuarioID, setNome, imagemDoUsuario, setImagemDoUsuario } = useLogadoContext();
   const [mostrarCaixa, setMostrarCaixa] = useState(false);
-  const navigate = useNavigate();
-
-  console.log("imagem do usuario: ", imagemDoUsuario)
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const loginData = localStorage.getItem('login');
@@ -18,8 +16,7 @@ export default function Header() {
       const { log, userID, nome, imagem } = JSON.parse(loginData);
       setLogado(log);
       setUsuarioID(userID);
-      setNome(nome);       
-      console.log(imagem)
+      setNome(nome);             
       setImagemDoUsuario(imagem ? imagem : undefined);      
     } else {
       console.log("Nenhum dado de login encontrado no localStorage.");

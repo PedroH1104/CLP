@@ -35,10 +35,7 @@ export default function Social() {
             const response = await api.put(`/social/editarCurtida/${postId}`, { usuarioID });
 
             // Verifica se a resposta foi bem-sucedida
-            if (response.status === 200) {
-                console.log('Reação adicionada/removed com sucesso!');
-                // Atualize a lista de posts aqui se necessário
-                // Isso pode incluir a atualização do estado para refletir as mudanças na UI
+            if (response.status === 200) {                
                 const updatedPosts = posts.map(post =>
                     post.id === postId ? { ...post, curtidas: response.data.curtidas } : post
                 );

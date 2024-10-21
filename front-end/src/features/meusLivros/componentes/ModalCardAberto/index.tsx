@@ -68,9 +68,7 @@ export default function ModalCardAberto() {
         }
     };
 
-    const handleConcluirLivro = () => {
-
-        console.log("imagem do usuario antes do handle", imagemDoUsuario)
+    const handleConcluirLivro = () => {        
 
         concluirLivro({
             usuarioID,

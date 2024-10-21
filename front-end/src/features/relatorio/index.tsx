@@ -41,8 +41,7 @@ export default function Relatorio() {
   const handleBuscarRelatorio = async () => {
     try {
       if (selectedBookId) {
-        const historicos = await buscaRelatorio();
-        console.log(historicos);
+        const historicos = await buscaRelatorio();        
 
         const historicosDoLivro = historicos.filter((historico: HistoricoProps) => {
           return historico.livro === selectedBookId && historico.usuario === usuarioID;
@@ -63,10 +62,7 @@ export default function Relatorio() {
         
           if (historico.concluido) {
             const dataLeitura = parseDate(historico.data_leitura);
-            const dataMeta = parseDate(historico.data_meta);
-        
-            console.log(`Data de leitura: ${dataLeitura}`);
-            console.log(`Data da meta: ${dataMeta}`);
+            const dataMeta = parseDate(historico.data_meta);            
         
             if (dataMeta) {
               if (dataLeitura && dataLeitura <= dataMeta) {

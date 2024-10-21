@@ -25,23 +25,18 @@ export default function Login() {
   const verificarLogin = async () => {
     try {
       const resposta = await api.get("/usuarios/");      
-      const usuarios = resposta.data;
-      console.log(usuarios)
+      const usuarios = resposta.data;      
 
-      // Verificando se há um usuário com o email fornecido
-      const usuarioEncontrado = usuarios.find((user: any) => user.email === email);
-
-      console.log(usuarioEncontrado)
+      const usuarioEncontrado = usuarios.find((user: any) => user.email === email);      
 
       if (usuarioEncontrado) {
         // Se o usuário foi encontrado, verifica se a senha corresponde
         if (usuarioEncontrado.senha === senha) {
-          // Se as credenciais estão corretas, seta logado como true e define o ID do usuário   
-          console.log("imagem: ", usuarioEncontrado.imagem)      
+          // Se as credenciais estão corretas, seta logado como true e define o ID do usuário                 
           setUsuarioID(usuarioEncontrado.id);               
           setLogado(true);
           setNome(usuarioEncontrado.nome);          
-          setImagemDoUsuario(`https://clp-backend.onrender.com/${usuarioEncontrado.imagem}`)                    
+          setImagemDoUsuario(`http://localhost:8000/${usuarioEncontrado.imagem}`)                    
         } else {
           // Se a senha estiver incorreta, pode mostrar uma mensagem de erro
           alert("Senha incorreta");

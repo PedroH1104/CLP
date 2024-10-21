@@ -52,8 +52,7 @@ export function ModalCriacaoLivro() {
 
     try {
       const response = await CriaLivro(livroAdicionado);
-      if (response && response.status >= 200 && response.status < 300) {
-        console.log("Livro adicionado com sucesso!");
+      if (response && response.status >= 200 && response.status < 300) {        
         buscaLivrosPorUsuario();
         limpaCampos();
         setModalOpen(false);
@@ -70,12 +69,9 @@ export function ModalCriacaoLivro() {
     try {
       const response = await axios.get(
         `https://www.googleapis.com/customsearch/v1?q=${busca}&key=AIzaSyAgiU1Bcn3I-7nHHevvI3bWXHSYiaY3uF4&cx=61e32c63bae2147be&searchType=image`
-      );
-
-      // Obtém a primeira imagem dos resultados da pesquisa
-      console.log(response)
+      );      
       const primeiraImagem = response.data.items[0].link;
-      console.log(primeiraImagem)
+      
       return primeiraImagem
     } catch (error) {
       console.error('Erro ao buscar imagem do livro:', error);
