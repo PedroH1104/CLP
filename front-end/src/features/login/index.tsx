@@ -36,7 +36,7 @@ export default function Login() {
           setUsuarioID(usuarioEncontrado.id);               
           setLogado(true);
           setNome(usuarioEncontrado.nome);          
-          setImagemDoUsuario(`https://clp-backend.onrender.com/${usuarioEncontrado.imagem}`)                    
+          setImagemDoUsuario(`http://localhost:8000/${usuarioEncontrado.imagem}`)                    
         } else {
           // Se a senha estiver incorreta, pode mostrar uma mensagem de erro
           alert("Senha incorreta");
