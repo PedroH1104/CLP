@@ -21,3 +21,5 @@ O desenvolvimento do CLP vai muito além de ser apenas uma ferramenta para geren
 - **Simulação de banco de dados**: Embora o CLP atualmente utilize um banco de dados fake para fins de desenvolvimento e testes, meu objetivo é, no futuro, migrar para um banco de dados real, otimizando ainda mais a performance e escalabilidade do projeto. Essa transição me permitirá explorar tecnologias de banco de dados e gerenciar dados em um ambiente de produção de forma mais robusta.
 
 O CLP é, portanto, um projeto que reflete minha jornada como desenvolvedor, combinando teoria e prática em um produto que não só resolve um problema pessoal, mas também desafia minhas habilidades em diversas frentes. Cada nova funcionalidade implementada representa um passo importante no aprimoramento das minhas competências técnicas, e minha intenção é continuar expandindo o CLP, sempre buscando novas formas de tornar o aplicativo mais eficiente e inovador, enquanto aplico as melhores práticas de desenvolvimento e acompanho as tendências tecnológicas do mercado.
+
+## Passo a passo para rodar o projeto
