@@ -1,5 +1,6 @@
 import { api } from "@/api/api";
 import Header from "@/components/Header";
+import InputContainer from "@/components/InputContainer";
 import { useLogadoContext } from "@/contexts/LogadoContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -73,23 +74,18 @@ export default function Login() {
       <section className="flex items-center justify-center h-screen ">
         <div className="text-center flex flex-col gap-[15px] border border-azulPadrao rounded-lg p-6 items-center w-[367px] shadow-md shadow-[#add8e6]">
           <h1 className="font-bold text-[32px] text-azulPadrao">Sistema de Login</h1>
-
-          <input
+          <InputContainer
             type="text"
             value={email}
             onChange={digitaEmail}
-            placeholder="Email"
-            className="border p-2 w-full"
+            placeholder="Email"            
           />
-
-          <input
+          <InputContainer
             type="password"
             value={senha}
             onChange={digitaSenha}
-            placeholder="Senha"
-            className="border p-2 w-full"
+            placeholder="Senha"            
           />
-
           <button onClick={Entrar} className="bg-azulPadrao text-white px-4 py-2 rounded w-full">Entrar</button>
           <div className="flex gap-[4px]">
             <p className="text-cinzaEscuro">Não tem uma conta? </p>

@@ -86,10 +86,15 @@ export function LogadoProvider({ children }: { children: React.ReactNode }) {
       const livrosAPI = resposta.data;
       const titulosSet = new Set<string>();
 
+      const normalizaTitulo = (titulo: string | undefined) => {
+        if (!titulo) return '';
+        return titulo.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+      };
+
       const livrosNaoRepetidos = livrosAPI.filter((livroAPI: any) => {
         if (!titulosSet.has(livroAPI.titulo)) {
           titulosSet.add(livroAPI.titulo);
-          return !livros.some((livro: any) => livro.titulo === livroAPI.titulo);
+          return !livros.some((livro: any) => normalizaTitulo(livro.titulo) === normalizaTitulo(livroAPI.titulo));
         }
         return false;
       });
@@ -103,7 +108,7 @@ export function LogadoProvider({ children }: { children: React.ReactNode }) {
   };
 
   const ListarLivrosComMeta = () => {
-    const filteredLivros = livros.filter(livro => livro.data_meta !== undefined && livro.concluido != true);
+    const filteredLivros = livros.filter(livro => livro.data_meta !== "" && livro.concluido != true);
     setMetasDeLivros(filteredLivros); // Atualiza o estado metasDeLivros    
   };
 

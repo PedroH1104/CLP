@@ -59,7 +59,7 @@ export default function MeusLivros() {
           {livrosFiltrados.map((livro, index) => {
             let metaMessage = "";
 
-            if (livro.data_meta !== undefined && !livro.concluido) {
+            if (livro.data_meta !== "" && !livro.concluido) {
               // Verifica se a propriedade data_meta está presente
               const dataMeta = new Date(livro.data_meta);
               const hoje = new Date();

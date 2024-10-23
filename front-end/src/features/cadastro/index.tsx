@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "@/api/api";
 import { v4 as uuidv4 } from 'uuid'; 
+import InputContainer from "@/components/InputContainer";
 
 export default function Cadastro() {
   const [email, setEmail] = useState("");
@@ -85,36 +86,32 @@ export default function Cadastro() {
         <div className="text-center flex flex-col gap-[15px] border border-azulPadrao rounded-lg p-6 items-center w-[367px] shadow-md shadow-[#add8e6]">
           <h1 className="font-bold text-[32px] text-azulPadrao">Sistema de Cadastro</h1>
 
-          <input
+          <InputContainer
             type="text"
             value={nome}
             onChange={digitaNome}
-            placeholder="Nome"
-            className="border p-2 w-full"
+            placeholder="Nome"            
           />
 
-          <input
+          <InputContainer
             type="text"
             value={email}
             onChange={digitaEmail}
-            placeholder="Email"
-            className="border p-2 w-full"
+            placeholder="Email"            
           />
 
-          <input
+          <InputContainer
             type="password"
             value={senha}
             onChange={digitaSenha}
-            placeholder="Senha"
-            className="border p-2 w-full"
+            placeholder="Senha"            
           />
 
-          <input
+          <InputContainer
             type="password"
             value={confirmacaoSenha}
             onChange={digitaConfirmacaoSenha}
-            placeholder="Confirmar Senha"
-            className="border p-2 w-full"
+            placeholder="Confirmar Senha"            
           />
 
           <input

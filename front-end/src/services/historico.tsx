@@ -7,8 +7,8 @@ interface adicionaLivroAoHistoricoProps{
 
 interface AtualizarProgressoProps {
     concluido: boolean;
-    quantidadePaginas: number;
-    paginaAtual: string;
+    quantidadePaginas: number | string;
+    paginaAtual: string | number;
     dataMeta: string | undefined;
     usuarioID: string;
     livroID: string;

@@ -8,7 +8,9 @@ import PostCard from "./componentes/PostCard";
 import TituloFeatures from "@/components/TituloFeatures";
 
 export default function Social() {
+
     Refresh()
+    
     const { usuarioID } = useLogadoContext();
     const [posts, setPosts] = useState<any[]>([]);
 
@@ -27,7 +29,6 @@ export default function Social() {
 
         fetchData();
     }, [posts]);
-
 
     const adicionaReacao = async (postId: string) => {
         try {
