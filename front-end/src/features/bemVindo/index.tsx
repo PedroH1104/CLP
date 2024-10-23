@@ -7,12 +7,10 @@ export default function BemVindo() {
             <HeaderNaoLogado />
             <div className="pt-[100px]" />
             <div className="w-full h-[350px] bg-gradient-to-r from-azulPadrao to-[#add8e6]  flex items-center justify-between">
-
                 <div className="flex flex-col items-center">
                     <h2 className="text-white text-[32px] font-bold ml-[75px]">Bem vindo ao CLP</h2>
                     <h3 className="text-white text-[28px] font-bold ml-[75px]">A melhor plataforma para controlar suas leituras</h3>
                 </div>
-
                 <img src={pessoaLendo} className="w-[275px] mr-[70px]" />
             </div>
             <div className="flex justify-around items-center mt-[100px]">

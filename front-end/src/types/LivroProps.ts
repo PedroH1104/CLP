@@ -10,5 +10,4 @@ export interface LivroProps{
     data_meta: any,
     avaliacao: any
 }
- 
-        
+

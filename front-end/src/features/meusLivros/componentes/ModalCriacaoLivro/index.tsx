@@ -13,6 +13,7 @@ import { CriaLivro } from "@/services/livro"
 import { useLogadoContext } from "@/contexts/LogadoContext"
 import { v4 as uuidv4 } from 'uuid';
 import axios from "axios"
+import { atualizarProgressoNoHistorico } from "@/services/historico"
 
 export function ModalCriacaoLivro() {
 
@@ -46,13 +47,24 @@ export function ModalCriacaoLivro() {
       pagina_atual: 0,
       concluido: false,
       imagem: await buscarImagemLivro(nomeLivro),
-      data_meta: undefined,
+      data_meta: "",
       avaliacao: 0
-    };
+    };    
 
     try {
       const response = await CriaLivro(livroAdicionado);
-      if (response && response.status >= 200 && response.status < 300) {        
+      if (response && response.status >= 200 && response.status < 300) {     
+        
+        const livroAdicionadoParaHistorico = {
+          concluido: false,
+          quantidadePaginas: quantidadePaginas,
+          paginaAtual: 0,
+          dataMeta: "",
+          usuarioID: usuarioID,
+          livroID: livroAdicionado.livro_id
+        }
+
+        atualizarProgressoNoHistorico(livroAdicionadoParaHistorico)
         buscaLivrosPorUsuario();
         limpaCampos();
         setModalOpen(false);
