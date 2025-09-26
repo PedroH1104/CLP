@@ -1,0 +1,44 @@
+{
+  "name": "frontendmobile",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "@react-native-community/datetimepicker": "8.4.4",
+    "@react-native-picker/picker": "2.11.1",
+    "@react-navigation/bottom-tabs": "^7.2.1",
+    "@react-navigation/native": "^7.0.15",
+    "@react-navigation/stack": "^7.1.2",
+    "axios": "^1.8.2",
+    "babel-preset-expo": "~54.0.0",
+    "date-fns": "^4.1.0",
+    "expo": "^54.0.0",
+    "expo-image-picker": "~17.0.8",
+    "expo-linear-gradient": "~15.0.7",
+    "expo-status-bar": "~3.0.8",
+    "react": "19.1.0",
+    "react-native": "0.81.4",
+    "react-native-chart-kit": "^6.12.0",
+    "react-native-date-picker": "^4.3.0",
+    "react-native-dotenv": "^3.4.11",
+    "react-native-gesture-handler": "~2.28.0",
+    "react-native-get-random-values": "~1.11.0",
+    "react-native-reanimated": "~4.1.0",
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-screens": "~4.16.0",
+    "react-native-uuid": "^2.0.3",
+    "react-native-vector-icons": "^10.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@types/expo__vector-icons": "^9.0.1",
+    "typescript": "~5.9.2"
+  },
+  "private": true
+}
