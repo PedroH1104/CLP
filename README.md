@@ -133,4 +133,4 @@ Troque tanto `<username>` como `<password>` pelos seus dados, atenção para man
 
 ![Imagem mostrando os comandos sendo rodados](./assetsREADME/img10.png)
 
-**5.7** - Ele gerará um qrcode, caso no aplicativo expo go não tenha a opção "Scan QR code" utilize a câmera do seu celular e aponte para o código. Pronto, você já pode desfrutar do Athela.   
+**5.7** - Ele gerará um qrcode, caso no aplicativo expo go não tenha a opção "Scan QR code" utilize a câmera do seu celular e aponte para o código. Pronto, você já pode desfrutar do CLP.   
