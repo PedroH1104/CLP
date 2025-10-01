@@ -67,7 +67,7 @@ Este projeto continua em desenvolvimento e meu objetivo é expandir suas funcion
 
 ### 3. Integrando com API do google
 
-**3.1** - Acesse o [Console do Google Cloud](console.cloud.google.com) e faça login.
+**3.1** - Acesse o [Console do Google Cloud](https://console.cloud.google.com) e faça login.
 
 **3.2** - No topo da página, ao lado do logo do Google Cloud, clique no nome do projeto atual e depois em "Novo projeto". Dê um nome para o seu projeto e crie-o.
 
