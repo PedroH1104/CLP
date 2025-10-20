@@ -104,14 +104,21 @@ Este projeto continua em desenvolvimento e meu objetivo é expandir suas funcion
 
 ![Imagem mostrando onde criar um novo projeto](./assetsREADME/img2.png)
 
-**4.4** - Abrirá uma tela como na imagem acima, salve em um lugar seguro tanto seu **username** como sua **password**. 
+**4.4** - Abrirá uma tela como na imagem acima, salve sua **password** em um lugar seguro. 
 
-**4.5** - Clique em **Create Database User**, em seguida abra a pasta **back-end** no seu projeto, e raiz dela haverá um arquivo .env, nele terá algo como:
+**4.5** - Clique em **Create Database User**, e em seguida **Choose a connection method** selecionando a opção **Drivers**.
 
-**USERNAME_STRING=`<seu_username_aqui>`**  
-**PASSWORD_STRING=`<sua_password_aqui>`** 
+**4.6** - Nessa tela, copie a string do campo mostrado na imagem abaixo.
 
-Troque tanto `<username>` como `<password>` pelos seus dados, atenção para manter o **:** entre os dois. Deverá ficar algo como a imagem abaixo. Salve o arquivo, e pronto você está conectado com o banco.
+![Imagem mostrando onde criar um novo projeto](./assetsREADME/img3.png)
+
+**4.7** - Troque a parte com `<db_password>` pela senha copiada anteriormente.
+
+**4.8** - Em seguida, abra a pasta **back-end** no seu projeto, e raiz dela haverá um arquivo .env, nele terá algo como:
+
+**CONNECTION_STRING=`<sua_string_de_conexao_aqui>`**
+
+Troque `<sua_string_de_conexao_aqui>` pela string salva e ficará algo como CONNECTION_STRING=mongodb+srv://seulogin:suasenha@cluster0.acm5m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0.
 
 ### 5. Rodando o projeto
 
