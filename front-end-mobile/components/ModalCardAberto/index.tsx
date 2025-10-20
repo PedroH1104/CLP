@@ -8,6 +8,7 @@ import StarRating from '../StarRating';
 import { Ionicons } from "@expo/vector-icons";
 import ErrorText from '../ErrorText';
 import ModalConfirmacao from '../ModalConfirmacao';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function ModalCardAberto() {
     const { cardAberto, modalOpen, modalQueEstaAberto, setModalOpen } = useModalContext();
@@ -27,6 +28,8 @@ export default function ModalCardAberto() {
         inputRef,
         modalConfirmacaoVisivel,
         setModalConfirmacaoVisivel,
+        showDatePicker,
+        setShowDatePicker,
         showMode,
         handleDelete,
         confirmarDelete,
@@ -37,7 +40,7 @@ export default function ModalCardAberto() {
 
     // Estado local para o input de página, o valor atual que está sendo digitado
     const [paginaInput, setPaginaInput] = useState(paginaAtual.toString());
-    
+
     // Estado local para o placeholder do input de página
     const [inputPlaceholder, setInputPlaceholder] = useState("Digite a página");
 
@@ -132,7 +135,7 @@ export default function ModalCardAberto() {
                                         </View>
                                     </Pressable>
                                     <Text style={styles.label}>Estabelecer prazo para leitura?</Text>
-                                    {date ?
+                                    {date ? (
                                         <View style={styles.dateContainer}>
                                             <Text style={styles.dateText}>{date.toLocaleDateString()}</Text>
                                             <Ionicons
@@ -143,11 +146,24 @@ export default function ModalCardAberto() {
                                                 style={styles.closeIcon}
                                             />
                                         </View>
-                                        :
+                                    ) : (
                                         <View style={{ marginTop: 20 }}>
                                             <Button onPress={showMode} title="Selecionar data" />
                                         </View>
-                                    }
+                                    )}
+
+                                    {showDatePicker && (
+                                        <DateTimePicker
+                                            value={date || new Date()}
+                                            mode="date"
+                                            display="default"
+                                            minimumDate={new Date(2000, 0, 1)}
+                                            onChange={(event, selectedDate) => {
+                                                setShowDatePicker(false);
+                                                if (selectedDate) setDate(selectedDate);
+                                            }}
+                                        />
+                                    )}
                                     <View style={styles.buttonContainer}>
                                         {loading ? <Loading /> :
                                             <>

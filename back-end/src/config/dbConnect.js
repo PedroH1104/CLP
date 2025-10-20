@@ -1,11 +1,8 @@
 import mongoose from "mongoose";
 
 async function conectaNaDatabase() {
-	const username = process.env.USERNAME_STRING;
-	const password = process.env.PASSWORD_STRING;
-
-	// Use template literals (crases) para construir a string de conexão
-	const connectionString = `mongodb+srv://${username}:${password}@cluster0.acm5m.mongodb.net/CLP?retryWrites=true&w=majority&appName=Cluster0`;
+	
+	const connectionString = process.env.CONNECTION_STRING;
 
 	try {
 		await mongoose.connect(connectionString);

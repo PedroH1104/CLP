@@ -4,7 +4,6 @@ import { useModalContext } from '../../context/modalContext';
 import { useLogadoContext } from '../../context/logadoContext';
 import { useLoadingContext } from '../../context/loadingContext';
 import { concluiLivro, deletaLivro, editaLivro } from '../../services/livro';
-import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { LivroAtualizadoProps, LivroConcluidoProps, LivroProps } from '../../types/Livro';
 import { PostCriadoProps } from '../../types/Post';
 
@@ -24,6 +23,7 @@ export const useLivro = (cardAberto: LivroProps) => {
     const [descricao, setDescricao] = useState("");
     const inputRef = useRef<TextInput>(null);
     const [modalConfirmacaoVisivel, setModalConfirmacaoVisivel] = useState(false);
+    const [showDatePicker, setShowDatePicker] = useState(false);
 
     // Efeito para resetar o estado quando um novo livro é aberto
     useEffect(() => {
@@ -36,17 +36,8 @@ export const useLivro = (cardAberto: LivroProps) => {
     }, [cardAberto]);
 
     const showMode = useCallback(() => {
-        DateTimePickerAndroid.open({
-            value: date || new Date(),
-            onChange: (event, selectedDate) => {
-                if (event.type === "set" && selectedDate) {
-                    setDate(selectedDate);
-                }
-            },
-            mode: "date",
-            is24Hour: true,
-        });
-    }, [date]);
+    setShowDatePicker(true);
+    }, []);
 
     const handleDelete = useCallback(() => {
         setModalConfirmacaoVisivel(true);
@@ -171,6 +162,8 @@ export const useLivro = (cardAberto: LivroProps) => {
         inputRef,
         modalConfirmacaoVisivel,
         setModalConfirmacaoVisivel,
+        showDatePicker,
+        setShowDatePicker,
         showMode,
         handleDelete,
         confirmarDelete,
