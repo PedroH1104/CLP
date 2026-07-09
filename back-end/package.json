@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon server.js",
+    "evaluate:agent": "node src/agents/leitura/evaluation/evaluate.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node seed.js"
   },
@@ -17,7 +18,9 @@
     "express": "^4.18.1",
     "mongodb": "^6.15.0",
     "mongoose": "^7.3.4",
-    "nodemon": "^3.0.1"
+    "multer": "^2.1.1",
+    "nodemon": "^3.0.1",
+    "openai": "^6.42.0"
   },
   "devDependencies": {
     "eslint": "^8.33.0"

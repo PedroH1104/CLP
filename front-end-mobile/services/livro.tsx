@@ -3,7 +3,38 @@ import { api } from '../api/api';
 import axios from 'axios';
 import { LivroAdicionadoProps, LivroAtualizadoProps, LivroConcluidoProps } from '../types/Livro';
 import { PostCriadoProps } from '../types/Post';
-import { GOOGLE_API_KEY, ID_MECANISMO_PESQUISA } from '@env';
+import { GOOGLE_BOOKS_API_KEY } from '@env';
+
+const imagemPadrao = "https://placehold.co/300x450?text=Livro";
+
+function montarUrlGoogleBooks(consulta: string) {
+    const chave = GOOGLE_BOOKS_API_KEY;
+    const params = new URLSearchParams({
+        q: consulta,
+        maxResults: "10",
+        printType: "books",
+    });
+
+    if (chave) {
+        params.append("key", chave);
+    }
+
+    return `https://www.googleapis.com/books/v1/volumes?${params.toString()}`;
+}
+
+function escolherImagem(data: any) {
+    const itens = data.items || [];
+    const itemComImagem = itens.find((item: any) =>
+        item.volumeInfo?.imageLinks?.thumbnail ||
+        item.volumeInfo?.imageLinks?.smallThumbnail
+    );
+
+    const imagem =
+        itemComImagem?.volumeInfo?.imageLinks?.thumbnail ||
+        itemComImagem?.volumeInfo?.imageLinks?.smallThumbnail;
+
+    return imagem ? imagem.replace("http://", "https://") : undefined;
+}
 
 export const buscaLivrosPorUsuario = async (usuarioId:string, setLivros:any) => {
     try {
@@ -11,37 +42,49 @@ export const buscaLivrosPorUsuario = async (usuarioId:string, setLivros:any) => 
       const livrosUsuario = resposta.data;
       setLivros(livrosUsuario);
     } catch (erro) {
-      console.error('Erro ao buscar livros do usuário:', erro);
+      console.error('Erro ao buscar livros do usuario:', erro);
     }
   };
 
 export const buscarImagemLivro = async (nome: string) => {
-    const busca = `capa do livro ${nome}`;    
-
-    // Verifique se as duas variáveis existem antes de fazer a requisição
-    if (!GOOGLE_API_KEY || !ID_MECANISMO_PESQUISA) {
-        console.error("As variáveis de ambiente para a API do Google não foram definidas.");
-        return null;
-    }
+    const consultas = [
+        `intitle:"${nome}"`,
+        `intitle:${nome}`,
+        nome,
+    ];
 
     try {
-        const response = await axios.get(
-            // Use template literals (crases) para construir a URL completa
-            `https://www.googleapis.com/customsearch/v1?q=${busca}&key=${GOOGLE_API_KEY}&cx=${ID_MECANISMO_PESQUISA}&searchType=image`
-        );
-        return response.data.items[0]?.link;
-    } catch (error) {
-        console.error("Erro ao buscar imagem do livro:", error);
-        return null;
+        for (const consulta of consultas) {
+            const response = await axios.get(montarUrlGoogleBooks(consulta));
+
+            const imagem = escolherImagem(response.data);
+
+            console.log("[buscarImagemLivro] Google Books", {
+                titulo: nome,
+                consulta,
+                totalItems: response.data.totalItems,
+                encontrouImagem: Boolean(imagem),
+            });
+
+            if (imagem) {
+                return imagem;
+            }
+        }
+
+        return imagemPadrao;
+    } catch (error: any) {
+        console.error("[buscarImagemLivro] Erro no Google Books:", {
+            status: error.response?.status,
+            mensagem: error.response?.data?.error?.message || error.message,
+        });
+        return imagemPadrao;
     }
 };
 
 export async function criarLivro(livroAdicionado: LivroAdicionadoProps) {
   try {
     await api.post("/livros", livroAdicionado, { timeout: 10000 });
-    // Em caso de sucesso, não faz nada. O componente que chamou irá lidar com a resposta.
   } catch (error) {
-    // Lança o erro para que o componente que a chamou possa tratá-lo.
     throw error;
   }
 }
@@ -63,18 +106,15 @@ export async function concluiLivro(idLivro: string, alteracoesLivro: LivroConclu
         await editaLivro(idLivro, alteracoesLivro);
         await criaPost(novoPost);
     } catch (err) {
-        // A função de serviço continua sendo responsável por essa lógica interna
         throw err;
     }
 }
 
 export async function editaLivro(idLivro: string, alteracoes: LivroConcluidoProps | LivroAtualizadoProps) {
-    // Apenas faz a chamada à API e "lança" o erro implicitamente se algo falhar
     await api.put(`/livros/${idLivro}`, alteracoes, { timeout: 10000 });
 }
 
 export async function deletaLivro(idLivro: string) {
-    // Apenas faz a chamada à API
     await api.delete(`/livros/${idLivro}`, { timeout: 10000 });
 }
 

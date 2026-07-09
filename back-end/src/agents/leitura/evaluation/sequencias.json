@@ -1,0 +1,71 @@
+[
+  {
+    "nome": "Criacao com paginas faltantes",
+    "passos": [
+      {
+        "texto": "Crie o livro Dom Casmurro do genero romance",
+        "esperado": {
+          "acao": "criar_livro",
+          "titulo": "Dom Casmurro",
+          "pendencia": true,
+          "camposFaltantes": ["paginas"]
+        }
+      },
+      {
+        "texto": "Tem 256 paginas",
+        "planoOpenAI": {
+          "acao": "criar_livro",
+          "parametros": {
+            "titulo": "Dom Casmurro",
+            "paginas": 256,
+            "categoria": "Romance"
+          },
+          "deliberacaoLLM": {
+            "usouPendenciaNoPrompt": true
+          }
+        },
+        "esperado": {
+          "acao": "criar_livro",
+          "titulo": "Dom Casmurro",
+          "paginas": 256,
+          "categoria": "Romance",
+          "pendencia": false,
+          "usouPendencia": true
+        }
+      }
+    ]
+  },
+  {
+    "nome": "Atualizacao de pagina com titulo faltante",
+    "passos": [
+      {
+        "texto": "Atualize para a pagina 90",
+        "esperado": {
+          "acao": "atualizar_pagina",
+          "pendencia": true,
+          "camposFaltantes": ["titulo"]
+        }
+      },
+      {
+        "texto": "O livro e A Sombra do Vento",
+        "planoOpenAI": {
+          "acao": "atualizar_pagina",
+          "parametros": {
+            "titulo": "A Sombra do Vento",
+            "paginaAtual": 90
+          },
+          "deliberacaoLLM": {
+            "usouPendenciaNoPrompt": true
+          }
+        },
+        "esperado": {
+          "acao": "atualizar_pagina",
+          "titulo": "A Sombra do Vento",
+          "paginaAtual": 90,
+          "pendencia": false,
+          "usouPendencia": true
+        }
+      }
+    ]
+  }
+]

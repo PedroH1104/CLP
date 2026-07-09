@@ -6,6 +6,7 @@ import CardLivro from '../../../components/CardLivro';
 import { useModalContext } from '../../../context/modalContext';
 import { ModalsController } from '../../../components/ModalsController';
 import { Ionicons } from '@expo/vector-icons';
+import AssistenteLeitura from '../../../components/AssistenteLeitura';
 
 export default function MeusLivros() {
 
@@ -32,7 +33,18 @@ export default function MeusLivros() {
   };
 
   return (
-    <PageStructure title="Meus Livros" icon="book">
+    <PageStructure
+      title="Meus Livros"
+      icon="book"
+      floatingContent={
+        <View style={styles.floatingActions}>
+          <AssistenteLeitura />
+          <TouchableOpacity style={styles.fab} onPress={abrirModalCriacaoLivro}>
+            <Ionicons name="add" size={32} color="white" />
+          </TouchableOpacity>
+        </View>
+      }
+    >
       <View style={styles.container}>
         {livros.length > 0 &&<TextInput
           style={styles.input}
@@ -63,9 +75,6 @@ export default function MeusLivros() {
           </Text>
         )}
         {modalOpen && <ModalsController/>}
-        <TouchableOpacity style={styles.fab} onPress={abrirModalCriacaoLivro}>
-          <Ionicons name="add" size={32} color="white" />
-        </TouchableOpacity>
       </View>
       
     </PageStructure>
@@ -74,7 +83,8 @@ export default function MeusLivros() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,    
+    flex: 1,
+    paddingBottom: 140,
   },
   input: {
     height: 40,
@@ -103,13 +113,10 @@ const styles = StyleSheet.create({
     color: '#999',
   },
   fab: {
-    position: 'absolute',
-    bottom: -100,
-    right: 20,
     backgroundColor: '#2A6FB0', // Cor azul
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 64,
+    height: 64,
+    borderRadius: 32,
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 5, // Sombra no Android
@@ -117,5 +124,14 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
+  },
+  floatingActions: {
+    position: 'absolute',
+    right: 20,
+    bottom: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    gap: 12,
   },
 });
