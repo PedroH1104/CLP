@@ -6,6 +6,7 @@ import {
   TextInput,
   StyleSheet,
   Switch,
+  InteractionManager,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PageStructure from '../../../components/PageStructure';
@@ -15,44 +16,95 @@ import { useLoadingContext } from '../../../context/loadingContext';
 import Loading from '../../../components/Loading';
 
 export default function Perfil({ navigation }: any) {
-  const { emailDoUsuario, nome, usuarioID, setNome, setEmailDoUsuario } = useLogadoContext(); // Certifique-se de usar `useLogadoContext()` como uma função.
+  const {
+    emailDoUsuario,
+    nome,
+    usuarioID,
+    setEmailDoUsuario,
+    setImagemDoUsuario,
+    setListaSugestoes,
+    setLivros,
+    setLogado,
+    setMetasDeLivros,
+    setNome,
+    setPosts,
+    setUsuarioID,
+  } = useLogadoContext();
   const { loading, setLoading } = useLoadingContext();
 
   const [isEditable, setIsEditable] = useState(false);
   const [currentEmail, setCurrentEmail] = useState(emailDoUsuario || '');
   const [currentName, setCurrentName] = useState(nome || '');
+  const [saindo, setSaindo] = useState(false);
+
+  const limparSessao = () => {
+    setLogado(false);
+    setUsuarioID(undefined);
+    setNome('');
+    setEmailDoUsuario('');
+    setImagemDoUsuario(undefined);
+    setLivros([]);
+    setPosts([]);
+    setListaSugestoes([]);
+    setMetasDeLivros([]);
+  };
 
   const handleLogout = async () => {
+    if (saindo) return;
+
+    setSaindo(true);
+
     try {
-      await AsyncStorage.clear(); // Limpa todos os dados do AsyncStorage
-      navigation.navigate('Inicio'); // Redireciona para a tela de BemVindo
+      await AsyncStorage.removeItem('login');
+
+      const rootNavigation =
+        navigation.getParent?.()?.getParent?.() ||
+        navigation.getParent?.() ||
+        navigation;
+
+      rootNavigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      });
+
+      InteractionManager.runAfterInteractions(limparSessao);
     } catch (error) {
-      console.error('Erro ao limpar o AsyncStorage', error);
+      console.error('Erro ao sair da conta', error);
+      setSaindo(false);
     }
   };
 
   const handleSave = async () => {
-
     setLoading(true);
 
     try {
-      // Requisição PUT para salvar as alterações
       const response = await api.put(`/usuarios/${usuarioID}`, {
         nome: currentName,
         email: currentEmail,
       });
-      console.log('Alterações salvas com sucesso:', response.data);
+      console.log('Alteracoes salvas com sucesso:', response.data);
 
       setNome(currentName);
       setEmailDoUsuario(currentEmail);
 
-      // Atualiza o AsyncStorage e desativa o modo de edição
-      await AsyncStorage.setItem('nome', currentName);
-      await AsyncStorage.setItem('email', currentEmail);
-      setLoading(false);
+      const loginData = await AsyncStorage.getItem('login');
+      if (loginData) {
+        const parsedData = JSON.parse(loginData);
+        await AsyncStorage.setItem(
+          'login',
+          JSON.stringify({
+            ...parsedData,
+            nome: currentName,
+            email: currentEmail,
+          })
+        );
+      }
+
       setIsEditable(false);
     } catch (error) {
-      console.error('Erro ao salvar as alterações:', error);
+      console.error('Erro ao salvar as alteracoes:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -66,9 +118,9 @@ export default function Perfil({ navigation }: any) {
             onValueChange={setIsEditable}
             thumbColor={isEditable ? '#003366' : '#ccc'}
           />
-          <Text style={styles.switchLabel}>Editar Informações</Text>
-
+          <Text style={styles.switchLabel}>Editar Informacoes</Text>
         </View>
+
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Nome</Text>
           <TextInput
@@ -78,6 +130,7 @@ export default function Perfil({ navigation }: any) {
             editable={isEditable}
           />
         </View>
+
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Email</Text>
           <TextInput
@@ -85,22 +138,29 @@ export default function Perfil({ navigation }: any) {
             value={currentEmail}
             onChangeText={setCurrentEmail}
             editable={isEditable}
+            autoCapitalize="none"
+            keyboardType="email-address"
           />
         </View>
-        {isEditable && (
-          loading ? (
+
+        {isEditable &&
+          (loading ? (
             <View style={styles.loadingContainer}>
-              <Loading /> 
+              <Loading />
             </View>
           ) : (
             <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-              <Text style={styles.saveButtonText}>Salvar Informações</Text>
+              <Text style={styles.saveButtonText}>Salvar Informacoes</Text>
             </TouchableOpacity>
-          )
-        )}
+          ))}
+
         {!isEditable && (
-          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-            <Text style={styles.logoutButtonText}>Sair</Text>
+          <TouchableOpacity
+            style={[styles.logoutButton, saindo && styles.disabledButton]}
+            onPress={handleLogout}
+            disabled={saindo}
+          >
+            <Text style={styles.logoutButtonText}>{saindo ? 'Saindo...' : 'Sair'}</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -170,7 +230,7 @@ const styles = StyleSheet.create({
   saveButtonText: {
     color: '#FFF',
     fontSize: 16,
-    fontWeight: 700,
+    fontWeight: '700',
   },
   logoutButton: {
     backgroundColor: '#FF3B30',
@@ -182,6 +242,9 @@ const styles = StyleSheet.create({
   logoutButtonText: {
     color: '#FFF',
     fontSize: 16,
-    fontWeight: 700,
+    fontWeight: '700',
+  },
+  disabledButton: {
+    opacity: 0.7,
   },
 });

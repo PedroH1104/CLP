@@ -1,5 +1,5 @@
 // env.d.ts
 declare module '@env' {
-  export const GOOGLE_API_KEY: string;  
-  export const ID_MECANISMO_PESQUISA: string;
+  export const API_URL: string;
+  export const GOOGLE_BOOKS_API_KEY: string;
 }

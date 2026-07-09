@@ -38,8 +38,13 @@ export async function cadastraUsuario({ nome, email, senha, confirmacaoSenha, im
 }
 
 export async function verificarLogin({ email, senha }: { email: string; senha: string; }) {
+    const login = {
+        email: email.trim().toLowerCase(),
+        senha: senha.trim(),
+    };
+
     try {
-        const resposta = await api.post('/usuarios/verificaLogin', { email, senha }, { timeout: 10000 });
+        const resposta = await api.post('/usuarios/verificaLogin', login, { timeout: 10000 });
         
         // Salva os dados no AsyncStorage.
         await AsyncStorage.setItem('login', JSON.stringify({

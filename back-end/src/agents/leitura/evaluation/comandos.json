@@ -1,0 +1,82 @@
+[
+  {
+    "texto": "Crie o livro Marley e eu, com 350 páginas do gênero drama",
+    "esperado": { "acao": "criar_livro", "titulo": "Marley e eu", "paginas": 350, "categoria": "Drama" }
+  },
+  {
+    "texto": "Crie um livro chamado Harry Potter do gênero fantasia com 700 páginas",
+    "esperado": { "acao": "criar_livro", "titulo": "Harry Potter", "paginas": 700, "categoria": "Fantasia" }
+  },
+  {
+    "texto": "Adicionar livro O Hobbit com 310 páginas de fantasia",
+    "esperado": { "acao": "criar_livro", "titulo": "O Hobbit", "paginas": 310, "categoria": "Fantasia" }
+  },
+  {
+    "texto": "Cadastre a obra 1984 com 328 páginas do gênero drama",
+    "esperado": { "acao": "criar_livro", "titulo": "1984", "paginas": 328, "categoria": "Drama" }
+  },
+  {
+    "texto": "Crie o livro Drácula, com 450 páginas da categoria terror",
+    "esperado": { "acao": "criar_livro", "titulo": "Drácula", "paginas": 450, "categoria": "Terror" }
+  },
+  {
+    "texto": "Atualize Dom Casmurro para a página 90",
+    "esperado": { "acao": "atualizar_pagina", "titulo": "Dom Casmurro", "paginaAtual": 90 }
+  },
+  {
+    "texto": "Coloque o livro O Hobbit na página 120",
+    "esperado": { "acao": "atualizar_pagina", "titulo": "O Hobbit", "paginaAtual": 120 }
+  },
+  {
+    "texto": "Estou na página 45 do livro A Revolução dos Bichos",
+    "esperado": { "acao": "atualizar_pagina", "titulo": "A Revolução dos Bichos", "paginaAtual": 45 }
+  },
+  {
+    "texto": "Atualizar o progresso de 1984 para página 200",
+    "esperado": { "acao": "atualizar_pagina", "titulo": "1984", "paginaAtual": 200 }
+  },
+  {
+    "texto": "Conclui Percy Jackson com nota 5 comentário gostei muito",
+    "esperado": { "acao": "concluir_livro", "titulo": "Percy Jackson", "avaliacao": 5, "descricao": "gostei muito" }
+  },
+  {
+    "texto": "Terminei o livro O Pequeno Príncipe nota 4 comentário leitura muito bonita",
+    "esperado": { "acao": "concluir_livro", "titulo": "O Pequeno Príncipe", "avaliacao": 4, "descricao": "leitura muito bonita" }
+  },
+  {
+    "texto": "Finalizar A Sombra do Vento com nota 5",
+    "esperado": { "acao": "concluir_livro", "titulo": "A Sombra do Vento", "avaliacao": 5 }
+  },
+  {
+    "texto": "Exclua o livro O Hobbit",
+    "esperado": { "acao": "excluir_livro", "titulo": "O Hobbit" }
+  },
+  {
+    "texto": "Remover Dom Casmurro da minha lista",
+    "esperado": { "acao": "excluir_livro", "titulo": "Dom Casmurro" }
+  },
+  {
+    "texto": "Delete o livro Marley e eu",
+    "esperado": { "acao": "excluir_livro", "titulo": "Marley e eu" }
+  },
+  {
+    "texto": "O que estão achando do livro A Sombra do Vento?",
+    "esperado": { "acao": "consultar_social", "titulo": "A Sombra do Vento" }
+  },
+  {
+    "texto": "Busca avaliações do livro A Sombra do Vento",
+    "esperado": { "acao": "consultar_social", "titulo": "A Sombra do Vento" }
+  },
+  {
+    "texto": "Mostre comentários sobre 1984",
+    "esperado": { "acao": "consultar_social", "titulo": "1984" }
+  },
+  {
+    "texto": "Quero ver opiniões de Sombra do Vento",
+    "esperado": { "acao": "consultar_social", "titulo": "Sombra do Vento" }
+  },
+  {
+    "texto": "Procure posts sobre o livro Drácula",
+    "esperado": { "acao": "consultar_social", "titulo": "Drácula" }
+  }
+]
